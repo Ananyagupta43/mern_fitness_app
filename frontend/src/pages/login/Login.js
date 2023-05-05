@@ -32,7 +32,7 @@ const Login = () => {
             window.alert("Invalid User Credentails");
         } else {
             window.alert("Login Successful");
-            navigate("/GetStarted");
+            navigate("/Getstarted");
         }
 
     }

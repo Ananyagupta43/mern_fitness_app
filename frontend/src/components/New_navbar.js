@@ -37,6 +37,9 @@ const New_navbar = () => {
             <a className="nav-link" href="/login">Login </a>
           </li>
           <li className="nav-item active">
+            <a className="nav-link" href="/logout">Logout </a>
+          </li>
+          <li className="nav-item active">
             <a className="nav-link" href="/signup">SignUp </a>
           </li>
         </ul>

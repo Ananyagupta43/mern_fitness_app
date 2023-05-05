@@ -124,7 +124,7 @@ body {
   text-decoration: none;
 }
 
-.click-text{
+.click-text {
   font-family: 'MetropolisSemiBold' !important;
 }
 
@@ -184,7 +184,7 @@ body {
   transform: rotateY(180deg);
 }
 
-.css-fnnlp4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected{
+.css-fnnlp4-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
   background: black !important;
 }
 
@@ -230,10 +230,24 @@ body {
   color: white !important;
 }
 
+/* welcome page  */
+
+.welcome-container {
+  background-color: black !important;
+  height: 100vh;
+  width: 100%;
+}
+
+.welcome-text {
+  color: white !important;
+  font-family: 'MetropolisSemiBold';
+}
+
+/* welcome page  */
+
+
 
 /* new banner */
-
-
 
 
 @media screen and (max-width:1200px) {

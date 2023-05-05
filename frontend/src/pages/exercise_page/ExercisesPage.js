@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ExercisesPage.css";
 import Navbar from "../../components/New_navbar";
 import ModelFront from "./../../assets/images/FRONT.png";
@@ -7,8 +7,41 @@ import SearchExercises from "../../components/SearchExercises";
 import ExerciseCard from "../../components/ExerciseCard";
 import { Pagination } from "@mui/material";
 import { Spinner } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 const ExercisesPage = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    callStartPage();    //we can not use  asyn function inside use effect
+  }, []) //runs only a single time on page reload
+
+  const callStartPage = async () => {
+    try {
+      const res = await fetch('/exercisesPage', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        credentials: "include"
+      });
+      const data = await res.json();
+      if (!res.status === 200) {
+
+        const err = new Error(res.error);
+        throw err;
+      }
+
+    } catch (err) {
+
+      navigate("/login");
+    }
+  }
+
+
   const [exercises, setExercises] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);

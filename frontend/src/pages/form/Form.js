@@ -1,0 +1,146 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Form.css";
+import "./../login/Login&Signup.css";
+
+const Form = () => {
+
+    const [person, setPerson] = useState({ age: "", gender: "", height: "", weight: "", neck: "", waist: "", activity: "1.465", goal: "m", hips: "" });
+
+    useEffect(() => {
+        const savedUserData = JSON.parse(localStorage.getItem('userData'));
+        if (savedUserData) {
+            setPerson(savedUserData);
+        }
+    }, [])
+
+    const handleDivInfo = (e) => {
+        const name = e.target.getAttribute('id');
+        const value = e.target.value;
+        setPerson({ ...person, [name]: value });
+    }
+
+    const handleInfo = (e) => {
+        // const {name,value} = e.target;
+        const name = e.target.name;
+        const value = e.target.value;
+        setPerson({ ...person, [name]: value });
+    }
+
+    const handleSave = () => {
+        const savedUserData = JSON.parse(localStorage.getItem('userData'))
+        if (savedUserData) {
+            const updatedUserData = { ...savedUserData, ...person };
+            localStorage.setItem('userData', JSON.stringify(updatedUserData));
+            setPerson(updatedUserData);
+        }
+        else {
+            localStorage.setItem('userData', JSON.stringify(person));
+            setPerson(person);
+        }
+    }
+
+    const navigate = useNavigate();
+    const goToCalculatorPage = (name) => {
+        // navigate(`/calculator/${name}?person=${JSON.stringify(person)}`);
+        navigate(`/calculator/${name}`, { state: { person } });
+    }
+
+    return <div className="form-bg" >
+        <form className="form" style={{ padding: "50 50px", width: "700px" }}>
+
+            <h1 style={{ textAlign: "center" }}>CALCULATORS</h1>
+
+            <label for="age" className="inputs-label"> Age</label>
+            <div className="inputs" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
+                <input type="number" id="age" onChange={handleDivInfo} value={person.age} required></input>
+                <div style={{ fontWeight: "600" }}>yrs</div>
+            </div>
+
+            <label className="inputs-label">Gender:</label>
+
+            <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }}>
+                <label for="Male" className="inputs-label"> Male
+                    <input type="radio" id="Male" name="gender" value="male" onChange={handleInfo} checked={person.gender === 'male'} required></input></label>
+                <label for="Female" className="inputs-label"> Female
+                    <input type="radio" id="Female" name="gender" value="female" onChange={handleInfo} checked={person.gender === 'female'} required></input></label>
+
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", flexWrap: "wrap" }}>
+
+                <div className="measurement-outer-div" >
+                    <label for="height" className="inputs-label " > Height</label>
+                    <div className="inputs measurement-inner-div"  >
+                        <input type="number" id="height" onChange={handleDivInfo} value={person.height} required></input>
+                        <div style={{ fontWeight: "600" }}>cm</div>
+                    </div>
+                </div>
+
+                <div className="measurement-outer-div" >
+                    <label for="weight" className="inputs-label " > Weight</label>
+                    <div className="inputs measurement-inner-div"  >
+                        <input type="number" id="weight" onChange={handleDivInfo} value={person.weight} required></input>
+                        <div style={{ fontWeight: "600" }}>kg</div>
+                    </div>
+                </div>
+
+                <div className="measurement-outer-div" >
+                    <label for="neck" className="inputs-label " > Neck</label>
+                    <div className="inputs measurement-inner-div"  >
+                        <input type="number" id="neck" onChange={handleDivInfo} value={person.neck} required></input>
+                        <div style={{ fontWeight: "600" }}>cm</div>
+                    </div>
+                </div>
+
+                <div className="measurement-outer-div" >
+                    <label for="waist" className="inputs-label "> Waist</label>
+                    <div className="inputs measurement-inner-div"  >
+                        <input type="number" id="waist" onChange={handleDivInfo} value={person.waist} required></input>
+                        <div style={{ fontWeight: "600" }}>cm</div>
+                    </div>
+                </div>
+
+                <div className="measurement-outer-div" >
+                    <label for="hips" className="inputs-label "> Hips</label>
+                    <div className="inputs measurement-inner-div"  >
+                        <input type="number" id="hips" onChange={handleDivInfo} value={person.hips} required></input>
+                        <div style={{ fontWeight: "600" }}>cm</div>
+                    </div>
+                </div>
+            </div>
+
+            <label className="inputs-label">How active are you ?</label>
+            <select for="activity" name="activity" className="inputs" style={{ fontWeight: "600" }} onChange={handleInfo} value={person.activity} required >
+                <option value="1.2">Sedentary: little or no exercise</option>
+                <option value="1.375">Light: exercise 1-3 times/week</option>
+                <option value="1.465">Moderate: exercise 4-5 times/week</option>
+                <option value="1.55">Active: daily exercise or intense exercise 3-4 times/week</option>
+                <option value="1.725">Very Active: intense exercise 6-7 times/week</option>
+                <option value="1.9">Extra Active: very intense exercise daily, or physical job</option>
+            </select>
+
+            {/*            <label className="inputs-label">Goal weight</label>
+            <select for="goal" name="goal" className="inputs" style={{ fontWeight: "600" }} onChange={handleInfo} required>
+                <option value="m" selected>Maintain weight</option>
+                <option value="l">Mild weight loss of 0.5 lb (0.25 kg) per week</option>
+                <option value="l1">Weight loss of 1 lb (0.5 kg) per week</option>
+                <option value="l2">Extreme weight loss of 2 lb (1 kg) per week</option>
+                <option value="g">Mild weight gain of 0.5 lb (0.25 kg) per week</option>
+                <option value="g1">Weight gain of 1 lb (0.5 kg) per week</option>
+                <option value="g2">Weight gain of 1 lb (0.5 kg) per week</option>
+</select> */}
+
+            <div style={{ display: "flex", justifyContent: 'flex-start', alignItems: "center", flexWrap: "wrap" }}>
+                <button className="button" type="button" onClick={() => handleSave()}>Save</button>
+                <button className="button" onClick={() => goToCalculatorPage("BMICalculator")}>BMI Calculator</button>
+                <button className="button" onClick={() => goToCalculatorPage("BodyFatCalculator")}>Body Fat Calculator</button>
+                <button className="button" onClick={() => goToCalculatorPage("BMRCalculator")}>BMR Calculator</button>
+                <button className="button" onClick={() => goToCalculatorPage("HealthyWeightCalculator")}>Healthy Weight Calculator</button>
+                <button className="button" onClick={() => goToCalculatorPage("CalorieCalculator")}>Calorie Calculator</button>
+            </div>
+        </form>
+    </div>
+}
+
+export default Form;

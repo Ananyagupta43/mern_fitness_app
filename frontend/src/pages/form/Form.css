@@ -1,0 +1,49 @@
+/* to remove the arrow button that comes with the input type number */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'MetropolisRegular';
+    src: url(../../assets/font/metropolis.regular.otf) format("opentype");
+}
+
+/* to remove the default box styling of inputs. specify the type otherwise you will face problem with the radio button */
+input[type="number"] {
+    all: unset;
+}
+
+::placeholder {
+    color: black;
+    font-weight: 600;
+}
+input[type="radio"]{
+    margin: 0 10px;
+}
+.measurement-outer-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 300px;
+    margin-right: 20px;
+}
+.measurement-inner-div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 225px
+}
+.form-bg{
+    padding: 100px 0 !important;
+    background-image: url("./../../assets/images/form-bg.jpg");
+    background-size: cover;
+    height: 100%;
+    color: white;
+    font-family: "MetropolisRegular";
+    display: flex;
+    justify-content: center;
+}

@@ -74,7 +74,7 @@ router.post('/signUp', async (req, res) => {
         //encrypting password first before saving
         const userRegister = await user.save();
         if (userRegister) {
-         
+
             res.status(201).json({ message: "User registered successfully" });
 
         } else {
@@ -154,5 +154,27 @@ router.get('/logout', authenticate, async (req, res) => {
         res.status(500).send(err);
     }
 })
+
+router.put('/update', async (req, res) => {
+
+    try {
+
+        if (!req.body.first_name || !req.body.last_name || !req.body.phone || !req.body.email) {
+            return res.status(400).json({ error: "Please fill all the fields" });
+        }
+        await User.findByIdAndUpdate(req.body._id, {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            phone: req.body.phone,
+            email: req.body.email
+        });
+        return res.status(200).json({ message: "Details Updated Successfully" });
+
+    } catch (err) {
+        console.error(err.message);
+        res.send(400).send('Server Error');
+    }
+});
+
 
 module.exports = router;

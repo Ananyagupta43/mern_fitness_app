@@ -15,6 +15,7 @@ import SingleExercise from "./pages/single_exercise/SingleExercise";
 import Form from "./pages/form/Form";
 import Calculator from './pages/Calculator';
 
+import UserProfile from './pages/UserProfile/UserProfile';
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/singleExercise" element={<SingleExercise />} />
         <Route path="/form" element={<Form /> } />
         <Route path="/calculator/:name" element={<Calculator /> } />
+        <Route path="/userProfile" element={<UserProfile />} />
       </Routes>
       <Footer />
     </Box>

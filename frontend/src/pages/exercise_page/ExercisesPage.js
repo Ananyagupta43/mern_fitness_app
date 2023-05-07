@@ -40,7 +40,9 @@ const ExercisesPage = () => {
       navigate("/login");
     }
   }
+  const exerciseDetails = ()=>{
 
+  }
 
   const [exercises, setExercises] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -71,7 +73,7 @@ const ExercisesPage = () => {
         {
           currentExercises.map((exercise, index) => (
             <div style={{ margin: "25px 10px", borderRadius: "15px", cursor: "pointer", width: "380px", height: "auto", backgroundColor: "white", boxShadow: " 0px 5px 10px 0px rgba(0, 0, 0, 0.5)" }}>
-              <ExerciseCard key={index} exercise={exercise} />
+              <ExerciseCard key={index} exercise={exercise} onclick= { (exercise)=> exerciseDetails(exercise)}/>
             </div>
           ))
         }

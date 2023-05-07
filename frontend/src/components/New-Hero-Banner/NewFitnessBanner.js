@@ -4,9 +4,16 @@ import anime from 'animejs';
 import styles from './nh-banner.css';
 import Navbar from '../New_navbar';
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+const NewFitnessBanner = () => {
 
-const nhbanner = () => {
+    const navigate = useNavigate();
+
+    const changePage=()=>{
+      navigate("/signup");
+    }
+
   return (
     <div className="section-wrapper">
       <Navbar />
@@ -25,11 +32,11 @@ const nhbanner = () => {
         </div>
 
         <div className="button-st">
-          <button className="button-end mt-2" href="#exercises">Explore</button>
+          <button className="button-end mt-2" href="#exercises"  onClick={changePage}>Explore</button>
         </div>
       </div>
     </div>
   )
 }
 
-export default nhbanner
+export default NewFitnessBanner

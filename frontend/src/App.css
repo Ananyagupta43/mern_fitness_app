@@ -233,7 +233,7 @@ body {
 /* welcome page  */
 
 .welcome-container {
-  background-color: black !important;
+  background:linear-gradient(black,rgb(33, 33, 33)) !important;
   height: 100vh;
   width: 100%;
 }
@@ -242,6 +242,16 @@ body {
   color: white !important;
   font-family: 'MetropolisSemiBold';
 }
+
+.get-started{
+
+    text-align: center
+}
+
+.start-container{
+  padding-top: 100px;
+}
+
 
 /* welcome page  */
 

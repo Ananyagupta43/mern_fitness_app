@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NewLogo from '../assets/images/exercise_pedia.png'
 
 
 const New_navbar = () => {
+
+  
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fitness-bar">
       {/* <a className="navbar-brand" href="#">Navbar</a> */}
@@ -33,7 +35,7 @@ const New_navbar = () => {
           </li>
         </ul>
         <ul className="end-container my-2 my-lg-0 navbar-nav mr-auto">
-          <li className="nav-item active">
+         <li className="nav-item active">
             <a className="nav-link" href="/login">Login </a>
           </li>
           <li className="nav-item active">
@@ -41,6 +43,9 @@ const New_navbar = () => {
           </li>
           <li className="nav-item active">
             <a className="nav-link" href="/signup">SignUp </a>
+          </li>
+          <li className="nav-item active">
+            <a className="nav-link" href="/userProfile">Profile</a>
           </li>
         </ul>
       </div>

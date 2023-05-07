@@ -74,10 +74,11 @@ router.post('/signUp', async (req, res) => {
         //encrypting password first before saving
         const userRegister = await user.save();
         if (userRegister) {
+         
             res.status(201).json({ message: "User registered successfully" });
 
         } else {
-            res.status(500).json({ message: "Unable to register" });
+            res.status(500).json({ message: "Email or phone already exists" });
 
         }
 
@@ -135,6 +136,11 @@ router.get('/exercisesPage', authenticate, (req, res) => {
 router.get('/GetStarted', authenticate, (req, res) => {
     res.send(req.rootUser);
 })
+
+router.get('/profile', authenticate, (req, res) => {
+    res.send(req.rootUser);
+})
+
 
 router.get('/logout', authenticate, async (req, res) => {
     try {

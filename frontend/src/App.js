@@ -11,6 +11,8 @@ import SignUp from "./pages/Signup";
 import ExercisesPage from "./pages/exercise_page/ExercisesPage";
 import GetStarted from './pages/GetStarted';
 import Signout from './pages/Signout';
+import UserProfile from './pages/UserProfile/UserProfile';
+
 const App = () => {
   return (
     <Box width="400px" sx={{ width: { xl: '1536px' } }} m="auto" className="main-container" >
@@ -23,6 +25,7 @@ const App = () => {
         <Route path="/exercisespage" element={<ExercisesPage />} />
         <Route path="/Getstarted" element={<GetStarted />} />
         <Route path="/logout" element={<Signout />} />
+        <Route path="/userProfile" element={<UserProfile />} />
       </Routes>
       <Footer />
     </Box>

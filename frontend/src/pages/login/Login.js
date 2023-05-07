@@ -32,6 +32,7 @@ const Login = () => {
             window.alert("Invalid User Credentails");
         } else {
             window.alert("Login Successful");
+            localStorage.setItem('jwtoken', JSON.stringify(data.jwtoken));
             navigate("/Getstarted");
         }
 

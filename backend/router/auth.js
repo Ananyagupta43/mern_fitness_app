@@ -74,10 +74,11 @@ router.post('/signUp', async (req, res) => {
         //encrypting password first before saving
         const userRegister = await user.save();
         if (userRegister) {
+
             res.status(201).json({ message: "User registered successfully" });
 
         } else {
-            res.status(500).json({ message: "Unable to register" });
+            res.status(500).json({ message: "Email or phone already exists" });
 
         }
 
@@ -117,7 +118,8 @@ router.post('/login', async (req, res) => {
         if (!isMatch) {
             res.json({ message: "Invalid Credentials" });
         } else {
-            res.json({ message: "Login Successful" });
+            res.json({ message: "Login Successful",
+        "jwtoken":token });
 
         }
 
@@ -136,6 +138,11 @@ router.get('/GetStarted', authenticate, (req, res) => {
     res.send(req.rootUser);
 })
 
+router.get('/profile', authenticate, (req, res) => {
+    res.send(req.rootUser);
+})
+
+
 router.get('/logout', authenticate, async (req, res) => {
     try {
         req.rootUser.tokens = req.rootUser.tokens.filter((element) => {
@@ -148,5 +155,27 @@ router.get('/logout', authenticate, async (req, res) => {
         res.status(500).send(err);
     }
 })
+
+router.put('/update', async (req, res) => {
+
+    try {
+
+        if (!req.body.first_name || !req.body.last_name || !req.body.phone || !req.body.email) {
+            return res.status(400).json({ error: "Please fill all the fields" });
+        }
+        await User.findByIdAndUpdate(req.body._id, {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            phone: req.body.phone,
+            email: req.body.email
+        });
+        return res.status(200).json({ message: "Details Updated Successfully" });
+
+    } catch (err) {
+        console.error(err.message);
+        res.send(400).send('Server Error');
+    }
+});
+
 
 module.exports = router;

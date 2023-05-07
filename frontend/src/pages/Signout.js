@@ -28,6 +28,11 @@ const Signout = () => {
         throw err;
 
       } else {
+        const token= JSON.parse(localStorage.getItem('jwtoken'));
+        if(token){
+          localStorage.removeItem("jwtoken");
+        }
+       
         navigate("/");
       }
     } catch (err) {

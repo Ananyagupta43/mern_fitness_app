@@ -1,26 +1,26 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NewLogo from '../assets/images/exercise_pedia.png'
 
 
 const New_navbar = () => {
 
-  const [isToken,setToken]=useState(true);
-  useEffect(()=>{
+  const [isToken, setToken] = useState(true);
+  useEffect(() => {
     allLocalValues();
-  },[])
+  }, [])
 
-  const allLocalValues=()=>{
-    
-   const token= JSON.parse(localStorage.getItem('jwtoken'));
-   if(token){
-    setToken(true);
-   }
-   if(!token){
-    setToken(false);
-   }
+  const allLocalValues = () => {
+
+    const token = JSON.parse(localStorage.getItem('jwtoken'));
+    if (token) {
+      setToken(true);
+    }
+    if (!token) {
+      setToken(false);
+    }
   }
-  
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark fitness-bar">
       {/* <a className="navbar-brand" href="#">Navbar</a> */}
@@ -45,23 +45,26 @@ const New_navbar = () => {
           <li className="nav-item active">
             <a className="nav-link" href="/">Home </a>
           </li>
-          <li className="nav-item active">
+          {isToken ? <li className="nav-item active">
             <a className="nav-link" href="/exercisespage">Exercises </a>
-          </li>
+          </li> : null}
+          {isToken ? <li className="nav-item active">
+            <a className="nav-link" href="/calculator/:name">Calculator </a>
+          </li> : null}
         </ul>
         <ul className="end-container my-2 my-lg-0 navbar-nav mr-auto">
-        {!isToken?<li className="nav-item active">
+          {!isToken ? <li className="nav-item active">
             <a className="nav-link" href="/login">Login </a>
-          </li>:null}
-          {isToken? <li className="nav-item active">
-           <a className="nav-link" href="/logout">Logout </a>
-          </li>:null}
-          {!isToken?   <li className="nav-item active">
+          </li> : null}
+          {isToken ? <li className="nav-item active">
+            <a className="nav-link" href="/logout">Logout </a>
+          </li> : null}
+          {!isToken ? <li className="nav-item active">
             <a className="nav-link" href="/signup">SignUp </a>
-          </li>:null}
-          {isToken? <li className="nav-item active">
+          </li> : null}
+          {isToken ? <li className="nav-item active">
             <a className="nav-link" href="/userProfile">Profile</a>
-          </li>:null}
+          </li> : null}
         </ul>
       </div>
     </nav>

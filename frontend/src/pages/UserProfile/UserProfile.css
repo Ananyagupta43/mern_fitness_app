@@ -1,36 +1,36 @@
-.profile-main-container{
+.profile-main-container {
     text-align: -webkit-center !important;
 }
 
-.profile-container{
-    display:flex;
+.profile-container {
+    display: flex;
     flex-direction: column;
     place-items: center;
-    width:600px;
-    padding-top:3%;
+    width: 600px;
+    padding-top: 3%;
 }
 
-.profile-rows{
+.profile-rows {
     align-items: center;
-    display:flex;
+    display: flex;
     flex-direction: row;
-    color:white;
+    color: white;
     justify-content: space-around;
     font-size: 20px;
-   
-    height:50px;
-  
+
+    height: 50px;
+
 }
 
-input{
-    border-radius:5px;
-    height:40px;
+.user-input {
+    border-radius: 5px;
+    height: 40px;
 }
 
-.user{
-    font-size:30px ;
+.user {
+    font-size: 30px;
 }
 
-.center-input{
+.center-input {
     text-align: center;
 }

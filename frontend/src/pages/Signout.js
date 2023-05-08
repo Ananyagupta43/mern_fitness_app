@@ -28,11 +28,15 @@ const Signout = () => {
         throw err;
 
       } else {
-        const token= JSON.parse(localStorage.getItem('jwtoken'));
-        if(token){
+        const token = JSON.parse(localStorage.getItem('jwtoken'));
+        if (token) {
           localStorage.removeItem("jwtoken");
         }
-       
+        const mailId = JSON.parse(localStorage.getItem('email'));
+        if (mailId) {
+          localStorage.removeItem("email");
+        }
+
         navigate("/");
       }
     } catch (err) {

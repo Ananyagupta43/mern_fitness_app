@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const authenticate = require('../middleware/authenticate');
 const cookieParser = require('cookie-parser');
 router.use(cookieParser());
+const nodemailer = require('nodemailer')
 
 // const middleware = (req, res, next) => {      //using middleware to make sure user is able to see login page if not logged in and is accessing about us.
 
@@ -118,8 +119,12 @@ router.post('/login', async (req, res) => {
         if (!isMatch) {
             res.json({ message: "Invalid Credentials" });
         } else {
-            res.json({ message: "Login Successful",
-        "jwtoken":token });
+            res.json({
+                message: "Login Successful",
+                "jwtoken": token,
+                "email": email
+            }
+            );
 
         }
 
@@ -176,6 +181,73 @@ router.put('/update', async (req, res) => {
         res.send(400).send('Server Error');
     }
 });
+
+router.post('/calculatingBmi', async (req, res) => {
+    try {
+
+        let transporter = await nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                type: 'OAuth2',
+                user: '22222guptakrishna@gmail.com',
+                password: process.env.PASSWORD,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN
+            }
+
+        })
+        let info = await transporter.sendMail({
+            from: "22222guptakrishna@gmail.com", // sender address
+            to: req.body.email, // list of receivers
+            subject: "Your BMI results", // Subject line
+            text: "Your height is " + req.body.height + ", your weight is " + req.body.weight + ", and the result of you bmi is " + req.body.bmi + ". Thanks for using exercisopedia in your fitness jouney." // plain text body
+
+        });
+        //console.log("Message sent: %s", info.messageId);
+        return res.status(200).json({ message: "Results are forwarded to your Email ID" });
+
+    } catch (err) {
+        res.status(500).json({ message: "Unable to register" });
+    }
+
+
+
+});
+
+router.post('/calculatingBMR', async (req, res) => {
+    try {
+
+        let transporter = await nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                type: 'OAuth2',
+                user: '22222guptakrishna@gmail.com',
+                password: process.env.PASSWORD,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN
+            }
+
+        })
+        let info = await transporter.sendMail({
+            from: "22222guptakrishna@gmail.com", // sender address
+            to: req.body.email, // list of receivers
+            subject: "Your BMR results", // Subject line
+            text: "Your height is " + req.body.height + ", your weight is " + req.body.weight + ",your age is " + req.body.age + ", your gender is " + req.body.gender + ", and the result of you bmr is " + req.body.bmr + ". Thanks for using exercisopedia in your fitness jouney." // plain text body
+
+        });
+        //console.log("Message sent: %s", info.messageId);
+        return res.status(200).json({ message: "Results are forwarded to your Email ID" });
+
+    } catch (err) {
+        res.status(500).json({ message: "Unable to register" });
+    }
+})
+
+
+
+
 
 
 module.exports = router;

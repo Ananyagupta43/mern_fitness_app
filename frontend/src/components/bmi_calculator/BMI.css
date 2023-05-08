@@ -64,3 +64,8 @@ h6 {
 p {
     color: #000;
 }
+
+.go-back {
+    margin-top: 0px !important;
+    background-color: #000 !important;
+}

@@ -33,6 +33,7 @@ const Login = () => {
         } else {
             window.alert("Login Successful");
             localStorage.setItem('jwtoken', JSON.stringify(data.jwtoken));
+            localStorage.setItem('email', JSON.stringify(data.email));
             navigate("/Getstarted");
         }
 

@@ -81,7 +81,7 @@ const UserProfile = () => {
             <div className="profile-rows user w-100">USER PROFILE</div>
             <div className="profile-rows w-100 mt-4">
               <div className="w-50">First Name</div>
-              <input type="text" id="first_name"
+              <input type="text user-input" id="first_name"
                 className="w-50 center-input"
                 value={tempCustomer.first_name}
                 onChange={(e) => {
@@ -92,7 +92,7 @@ const UserProfile = () => {
 
             <div className="profile-rows w-100 mt-4">
               <div className="w-50">Last Name</div>
-              <input type="text" id="last_name" className="w-50 center-input" value={tempCustomer.last_name}
+              <input type="text" id="last_name" className="w-50 center-input user-input" value={tempCustomer.last_name}
                 onChange={(e) => {
                   setChangedInfo(true)
                   setTempCustomer({ ...tempCustomer, last_name: e.target.value })
@@ -102,7 +102,7 @@ const UserProfile = () => {
 
             <div className="profile-rows w-100 mt-4">
               <div className="w-50">Phone Number</div>
-              <input type="text" id="phone" className="w-50 center-input" value={tempCustomer.phone}
+              <input type="text" id="phone" className="w-50 center-input user-input" value={tempCustomer.phone}
                 onChange={(e) => {
                   setChangedInfo(true)
                   setTempCustomer({ ...tempCustomer, phone: e.target.value })
@@ -112,7 +112,7 @@ const UserProfile = () => {
 
             <div className="profile-rows w-100 mt-4">
               <div className="w-50">Email</div>
-              <input type="text" id="email" className="w-50 center-input" value={tempCustomer.email}
+              <input type="text" id="email" className="w-50 center-input user-input" value={tempCustomer.email}
                 onChange={(e) => {
                   setChangedInfo(true)
                   setTempCustomer({ ...tempCustomer, email: e.target.value })

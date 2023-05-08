@@ -1,16 +1,58 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./BMI.css";
 import BmiChart from "./../../assets/images/bmi-chart.gif";
+import { useNavigate } from "react-router-dom";
+
 
 const BMI = ({ person }) => {
     const { height, weight } = person;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        callGetStarted();
+    }, [])
+
+    const callGetStarted = async () => {
+
+        const bmi = bmiValue(weight, height);
+        const email = JSON.parse(localStorage.getItem("email"));
+
+        if (!email) {
+            email = "abc@gmail.com"
+        }
+        const res = await fetch("/calculatingBmi", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            body: JSON.stringify({
+                height, weight, bmi, email
+            })
+
+        })
+
+        if (res.status() === 200) {
+            window.alert("Your results has been forwarded to your email ID");
+        } else {
+            const err = new Error(res.error);
+            throw err;
+        }
+
+    }
+
     const bmiValue = (weight, height) => {
         height = height / 100;
         const value = weight / (height * height);
         return value.toFixed(1);
     }
 
+    const goOnCalculator = () => {
+        navigate("/form")
+    }
+
     return <div style={{ padding: " 30px 50px" }}  >
+        <div style={{ width: "225px" }}><button className="button go-back" style={{ marginBottom: "30px" }} onClick={(goOnCalculator)}>Go Back</button></div>
         <h1 className="main-heading" >BMI Calculator</h1>
         <p>The Body Mass Index (BMI) Calculator can be used to calculate BMI value and corresponding weight status while taking age into consideration. Use the "Metric Units" tab for the International System of Units or the "Other Units" tab to convert units into either US or metric units. Note that the calculator also computes the Ponderal Index in addition to BMI, both of which are discussed below in detail.</p>
         <div className="result">Result :- {bmiValue(weight, height)} kg/m²</div>

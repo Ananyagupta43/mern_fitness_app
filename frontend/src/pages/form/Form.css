@@ -21,26 +21,27 @@ input[type="number"] {
     color: black;
     font-weight: 600;
 }
-input[type="radio"]{
+
+input[type="radio"] {
     margin: 0 10px;
 }
-.measurement-outer-div{
+
+.measurement-outer-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 300px;
     margin-right: 20px;
 }
-.measurement-inner-div{
+
+.measurement-inner-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 225px
 }
-.form-bg{ 
-    background-image: url("./../../assets/images/form-bg.jpg");
-    background-size: cover;
-    height: 100%;
+
+.form-bg {
     color: white;
     font-family: "MetropolisRegular";
     display: flex;
@@ -48,6 +49,23 @@ input[type="radio"]{
     flex-direction: column !important;
 }
 
-.cal-form{
+.cal-form {
     align-self: center;
+}
+
+.cal-container {
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.calculator-container {
+    background-image: url("./../../assets/images/form-bg.jpg");
+    background-size: cover;
+    height: 130vh;
+}
+
+.gender {
+    padding-left: 0px;
+    flex: 0 0 auto !important;
+    width: 33.33333333% !important;
 }

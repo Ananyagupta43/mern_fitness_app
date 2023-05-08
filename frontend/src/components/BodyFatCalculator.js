@@ -2,9 +2,11 @@ import React from "react";
 import "./bmi_calculator/BMI.css";
 import { Gradient } from "@mui/icons-material";
 import { orange, yellow } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 const BodyFatCalculator = ({ person }) => {
     const { gender, height, neck, waist, hips } = person;
+    const navigate = useNavigate();
 
     const bodyFatValue = (gender, height, neck, waist, hips) => {
         console.log('inside fn', person);
@@ -18,7 +20,12 @@ const BodyFatCalculator = ({ person }) => {
         }
     }
 
+    const goOnCalculator = () => {
+        navigate("/form")
+    }
+
     return <div style={{ padding: " 30px 50px" }}>
+        <div style={{ width: "225px" }}><button className="button go-back" style={{ marginBottom: "30px" }} onClick={(goOnCalculator)}>Go Back</button></div>
         <h1 className="main-heading">Body Fat Calculator</h1>
         <p>The Body Fat Calculator can be used to estimate your total body fat based on specific measurements. Use the "Metric Units" tab if you are more comfortable with the International System of Units (SI). To get the best results, measure to the nearest 1/4 inch (0.5 cm). This calculation is based on the U.S. Navy method, but also includes the calculation of body fat percentage using the BMI method (both of which are outlined below).</p>
         <div className="result">Result :-{bodyFatValue(gender, height, neck, waist, hips)} %</div>

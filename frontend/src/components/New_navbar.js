@@ -49,7 +49,7 @@ const New_navbar = () => {
             <a className="nav-link" href="/exercisespage">Exercises </a>
           </li> : null}
           {isToken ? <li className="nav-item active">
-            <a className="nav-link" href="/calculator/:name">Calculator </a>
+            <a className="nav-link" href="/form">Calculator </a>
           </li> : null}
         </ul>
         <ul className="end-container my-2 my-lg-0 navbar-nav mr-auto">

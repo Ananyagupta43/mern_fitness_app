@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Form.css";
 import "./../login/Login&Signup.css";
+import Navbar from '../../components/New_navbar'
 
 const Form = () => {
 
@@ -43,18 +44,42 @@ const Form = () => {
     const navigate = useNavigate();
     const goToCalculatorPage = (name) => {
         // navigate(`/calculator/${name}?person=${JSON.stringify(person)}`);
+        if((!person.height||!person.weight) && name=="BMICalculator"){
+            window.alert("Please enter height and weight");
+            navigate("/form")
+        }else if((!person.gender||!person.height||!person.neck||!person.waist||!person.hips) && name=="BodyFatCalculator"){
+            window.alert("Please enter height, gender,neck,waist and hips for calculating body fat");
+            navigate("/form")
+        }
+        else if((!person.age||!person.gender||!person.height||!person.weight||!person.activity) && name=="CalorieCalculator"){
+            window.alert("Please enter height, weight,age,gender and activity for calculating calorie");
+            navigate("/form")
+        }
+        else if((!person.height) && name=="HealthyWeightCalculator"){
+            window.alert("Please enter height for calculating healthy weight");
+            navigate("/form")
+        } else if((!person.age||!person.gender||!person.height||!person.weight||!person.activity) && name=="BMRCalculator"){
+            window.alert("Please enter height, weight,age,gender and activity for calculating BMR");
+            navigate("/form")
+        }
+
+       
+        else{
         navigate(`/calculator/${name}`, { state: { person } });
     }
+        }
+    
 
     return <div className="form-bg" >
-        <form className="form" style={{ padding: "50 50px", width: "700px" }}>
+        <Navbar/>
+        <form className="form cal-form" style={{ padding: "50 50px", width: "700px" }}>
 
             <h1 style={{ textAlign: "center" }}>CALCULATORS</h1>
 
             <label for="age" className="inputs-label"> Age</label>
             <div className="inputs" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }} >
-                <input type="number" id="age" onChange={handleDivInfo} value={person.age} required></input>
-                <div style={{ fontWeight: "600" }}>yrs</div>
+                <input type="number" style={{color:"black" }} id="age" onChange={handleDivInfo} value={person.age} required></input>
+                <div style={{ fontWeight: "600",color:"black" }}>yrs</div>
             </div>
 
             <label className="inputs-label">Gender:</label>
@@ -72,40 +97,40 @@ const Form = () => {
                 <div className="measurement-outer-div" >
                     <label for="height" className="inputs-label " > Height</label>
                     <div className="inputs measurement-inner-div"  >
-                        <input type="number" id="height" onChange={handleDivInfo} value={person.height} required></input>
-                        <div style={{ fontWeight: "600" }}>cm</div>
+                        <input type="number" id="height" style={{color:"black" }} onChange={handleDivInfo} value={person.height} required></input>
+                        <div style={{ fontWeight: "600",color:"black" }}>cm</div>
                     </div>
                 </div>
 
                 <div className="measurement-outer-div" >
                     <label for="weight" className="inputs-label " > Weight</label>
                     <div className="inputs measurement-inner-div"  >
-                        <input type="number" id="weight" onChange={handleDivInfo} value={person.weight} required></input>
-                        <div style={{ fontWeight: "600" }}>kg</div>
+                        <input type="number" id="weight" style={{color:"black" }} onChange={handleDivInfo} value={person.weight} required></input>
+                        <div style={{ fontWeight: "600",color:"black" }}>kg</div>
                     </div>
                 </div>
 
                 <div className="measurement-outer-div" >
                     <label for="neck" className="inputs-label " > Neck</label>
                     <div className="inputs measurement-inner-div"  >
-                        <input type="number" id="neck" onChange={handleDivInfo} value={person.neck} required></input>
-                        <div style={{ fontWeight: "600" }}>cm</div>
+                        <input type="number" id="neck" style={{color:"black" }} onChange={handleDivInfo} value={person.neck} required></input>
+                        <div style={{ fontWeight: "600",color:"black" }}>cm</div>
                     </div>
                 </div>
 
                 <div className="measurement-outer-div" >
                     <label for="waist" className="inputs-label "> Waist</label>
                     <div className="inputs measurement-inner-div"  >
-                        <input type="number" id="waist" onChange={handleDivInfo} value={person.waist} required></input>
-                        <div style={{ fontWeight: "600" }}>cm</div>
+                        <input type="number" id="waist" style={{color:"black" }} onChange={handleDivInfo} value={person.waist} required></input>
+                        <div style={{ fontWeight: "600",color:"black" }}>cm</div>
                     </div>
                 </div>
 
                 <div className="measurement-outer-div" >
                     <label for="hips" className="inputs-label "> Hips</label>
                     <div className="inputs measurement-inner-div"  >
-                        <input type="number" id="hips" onChange={handleDivInfo} value={person.hips} required></input>
-                        <div style={{ fontWeight: "600" }}>cm</div>
+                        <input type="number" id="hips" style={{color:"black" }} onChange={handleDivInfo} value={person.hips} required></input>
+                        <div style={{ fontWeight: "600",color:"black" }}>cm</div>
                     </div>
                 </div>
             </div>

@@ -37,8 +37,7 @@ input[type="radio"]{
     align-items: center;
     width: 225px
 }
-.form-bg{
-    padding: 100px 0 !important;
+.form-bg{ 
     background-image: url("./../../assets/images/form-bg.jpg");
     background-size: cover;
     height: 100%;
@@ -46,4 +45,9 @@ input[type="radio"]{
     font-family: "MetropolisRegular";
     display: flex;
     justify-content: center;
+    flex-direction: column !important;
+}
+
+.cal-form{
+    align-self: center;
 }

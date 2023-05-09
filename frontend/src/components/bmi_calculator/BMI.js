@@ -9,34 +9,39 @@ const BMI = ({ person }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        callGetStarted();
+        callGetStartedBMI();
     }, [])
 
-    const callGetStarted = async () => {
+    const callGetStartedBMI = async () => {
 
         const bmi = bmiValue(weight, height);
         const email = JSON.parse(localStorage.getItem("email"));
+        try {
+            if (!email) {
+                email = "abc@gmail.com"
+            }
+            const res = await fetch("/calculatingBmi", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
 
-        if (!email) {
-            email = "abc@gmail.com"
-        }
-        const res = await fetch("/calculatingBmi", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    height, weight, bmi, email
+                })
 
-            },
-            body: JSON.stringify({
-                height, weight, bmi, email
             })
 
-        })
-
-        if (res.status() === 200) {
-            window.alert("Your results has been forwarded to your email ID");
-        } else {
-            const err = new Error(res.error);
-            throw err;
+            if (res.status === 200) {
+                window.alert("Your results has been forwarded to your email ID");
+            } else {
+                const err = new Error(res.error);
+                throw err;
+            }
+        }
+        catch (err) {
+            console.log(err);
+            navigate("/login");
         }
 
     }

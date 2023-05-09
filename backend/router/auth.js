@@ -182,7 +182,7 @@ router.put('/update', async (req, res) => {
     }
 });
 
-router.post('/calculatingBmi', async (req, res) => {
+router.post('/calculatingBmi', authenticate, async (req, res) => {
     try {
 
         let transporter = await nodemailer.createTransport({
@@ -200,8 +200,8 @@ router.post('/calculatingBmi', async (req, res) => {
         let info = await transporter.sendMail({
             from: "22222guptakrishna@gmail.com", // sender address
             to: req.body.email, // list of receivers
-            subject: "Your BMI results", // Subject line
-            text: "Your height is " + req.body.height + ", your weight is " + req.body.weight + ", and the result of you bmi is " + req.body.bmi + ". Thanks for using exercisopedia in your fitness jouney." // plain text body
+            subject: "Your BMI results: ", // Subject line
+            text: "Your height is " + req.body.height + "cm, your weight is " + req.body.weight + "kg, and the result of you bmi is " + req.body.bmi + "kg/m². Thanks for using exercisopedia in your fitness journey." // plain text body
 
         });
         //console.log("Message sent: %s", info.messageId);
@@ -233,8 +233,8 @@ router.post('/calculatingBMR', async (req, res) => {
         let info = await transporter.sendMail({
             from: "22222guptakrishna@gmail.com", // sender address
             to: req.body.email, // list of receivers
-            subject: "Your BMR results", // Subject line
-            text: "Your height is " + req.body.height + ", your weight is " + req.body.weight + ",your age is " + req.body.age + ", your gender is " + req.body.gender + ", and the result of you bmr is " + req.body.bmr + ". Thanks for using exercisopedia in your fitness jouney." // plain text body
+            subject: "Your BMR results: ", // Subject line
+            text: "Your height is " + req.body.height + "cm, your weight is " + req.body.weight + "kg, your age is " + req.body.age + "yrs, your gender is " + req.body.gender + ", and the result of you bmr is " + req.body.bmr + "Calories/day. Thanks for using exercisopedia in your fitness journey." // plain text body
 
         });
         //console.log("Message sent: %s", info.messageId);
@@ -243,9 +243,95 @@ router.post('/calculatingBMR', async (req, res) => {
     } catch (err) {
         res.status(500).json({ message: "Unable to register" });
     }
+});
+
+router.post('/calculatingBodyFat', async (req, res) => {
+    try {
+
+        let transporter = await nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                type: 'OAuth2',
+                user: '22222guptakrishna@gmail.com',
+                password: process.env.PASSWORD,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN
+            }
+
+        })
+        let info = await transporter.sendMail({
+            from: "22222guptakrishna@gmail.com", // sender address
+            to: req.body.email, // list of receivers
+            subject: "Your Body Fat results: ", // Subject line
+            text: "Your height is " + req.body.height + "cm, your gender is " + req.body.gender + ", your neck is " + req.body.neck + "cm, your waist is " + req.body.waist + "cm, your hips are " + req.body.hips + "cm, and the result of you body fat is " + req.body.bodyFat + "%. Thanks for using exercisopedia in your fitness journey." // plain text body
+
+        });
+
+        return res.status(200).json({ message: "Results are forwarded to your Email ID" });
+
+    } catch (err) {
+        res.status(500).json({ message: "Unable to register" });
+    }
+});
+
+router.post('/calculatingCalorie', async (req, res) => {
+    try {
+
+        let transporter = await nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                type: 'OAuth2',
+                user: '22222guptakrishna@gmail.com',
+                password: process.env.PASSWORD,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN
+            }
+
+        })
+        let info = await transporter.sendMail({
+            from: "22222guptakrishna@gmail.com", // sender address
+            to: req.body.email, // list of receivers
+            subject: "Your Calories results: ", // Subject line
+            text: "Your height is " + req.body.height + "cm, your gender is " + req.body.gender + ", your weight is " + req.body.weight + "kg, your age is " + req.body.age + "yrs, your activity percantage is " + req.body.activity + ", and the result of you calories is " + req.body.calories + " calories/day. Thanks for using exercisopedia in your fitness journey." // plain text body
+
+        });
+        return res.status(200).json({ message: "Results are forwarded to your Email ID" });
+
+    } catch (err) {
+        res.status(500).json({ message: "Unable to register" });
+    }
 })
 
+router.post('/calculatingHealthyWeight', async (req, res) => {
+    try {
 
+        let transporter = await nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                type: 'OAuth2',
+                user: '22222guptakrishna@gmail.com',
+                password: process.env.PASSWORD,
+                clientId: process.env.CLIENT_ID,
+                clientSecret: process.env.CLIENT_SECRET,
+                refreshToken: process.env.REFRESH_TOKEN
+            }
+
+        })
+        let info = await transporter.sendMail({
+            from: "22222guptakrishna@gmail.com", // sender address
+            to: req.body.email, // list of receivers
+            subject: "Your Healthy Weight results: ", // Subject line
+            text: "Your height is " + req.body.height + "cm, and your healthy weight results are" + req.body.healthyWeight + "kg. Thanks for using exercisopedia in your fitness journey." // plain text body
+
+        });
+        return res.status(200).json({ message: "Results are forwarded to your Email ID" });
+
+    } catch (err) {
+        res.status(500).json({ message: "Unable to register" });
+    }
+})
 
 
 

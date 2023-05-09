@@ -6,10 +6,10 @@ const BMR = ({ person }) => {
     const { age, gender, height, weight, activity } = person;
     const navigate = useNavigate();
     useEffect(() => {
-        callGetStarted();
+        callGetStartedBMR();
     }, [])
 
-    const callGetStarted = async () => {
+    const callGetStartedBMR = async () => {
 
         const bmr = bmrValue(weight, age, height, gender)
         const email = JSON.parse(localStorage.getItem("email"));
@@ -29,7 +29,7 @@ const BMR = ({ person }) => {
 
         })
 
-        if (res.status() === 200) {
+        if (res.status === 200) {
             window.alert("Your results has been forwarded to your email ID");
         } else {
             const err = new Error(res.error);

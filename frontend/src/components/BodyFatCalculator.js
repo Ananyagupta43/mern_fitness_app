@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./bmi_calculator/BMI.css";
 import { Gradient } from "@mui/icons-material";
 import { orange, yellow } from "@mui/material/colors";
@@ -8,8 +8,40 @@ const BodyFatCalculator = ({ person }) => {
     const { gender, height, neck, waist, hips } = person;
     const navigate = useNavigate();
 
+    useEffect(() => {
+        callGetStartedBodyFat();
+    }, [])
+
+    const callGetStartedBodyFat = async () => {
+
+        const bodyFat = bodyFatValue(gender, height, neck, waist, hips)
+        const email = JSON.parse(localStorage.getItem("email"));
+
+        if (!email) {
+            email = "abc@gmail.com"
+        }
+        const res = await fetch("/calculatingBodyFat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            body: JSON.stringify({
+                gender, height, neck, waist, hips, bodyFat, email
+            })
+
+        })
+
+        if (res.status === 200) {
+            window.alert("Your results has been forwarded to your email ID");
+        } else {
+            const err = new Error(res.error);
+            throw err;
+        }
+
+    }
+
     const bodyFatValue = (gender, height, neck, waist, hips) => {
-        console.log('inside fn', person);
         if (gender === "male") {
             const value = (495 / (1.0324 - (0.19077 * Math.log10(Number(waist) - Number(neck))) + (0.15456 * Math.log10(Number(height))))) - 450;
             return value.toFixed(1);

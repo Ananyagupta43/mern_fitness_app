@@ -1,8 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./bmi_calculator/BMI.css";
+import { useNavigate } from "react-router-dom";
 
 const CalorieCalculator = ({ person }) => {
+
+    const navigate = useNavigate();
+
     const { age, gender, height, weight, activity } = person;
+
+    useEffect(() => {
+        callGetStartedCalorie();
+    }, [])
+
+    const callGetStartedCalorie = async () => {
+
+        const calories = calorieValue(weight, age, height, gender, activity);
+        const email = JSON.parse(localStorage.getItem("email"));
+
+        if (!email) {
+            email = "abc@gmail.com"
+        }
+        const res = await fetch("/calculatingCalorie", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            body: JSON.stringify({
+                weight, age, height, gender, activity, calories, email
+            })
+
+        })
+
+        if (res.status === 200) {
+            window.alert("Your results has been forwarded to your email ID");
+        } else {
+            const err = new Error(res.error);
+            throw err;
+        }
+
+    }
+
     const calorieValue = (weight, age, height, gender, activity) => {
         if (gender === "male") {
             const bmr = 10 * weight + 6.25 * height - 5 * age + 5;
@@ -16,7 +54,13 @@ const CalorieCalculator = ({ person }) => {
         }
     }
 
+    const goOnCalculator = () => {
+        navigate("/form")
+    }
+
+
     return <div style={{ padding: " 30px 50px" }}>
+        <div style={{ width: "225px" }}><button className="button go-back" style={{ marginBottom: "30px" }} onClick={(goOnCalculator)}>Go Back</button></div>
         <h1 className="main-heading" >Calorie Calculator</h1>
         <p>The Calorie Calculator can be used to estimate the number of calories a person needs to consume each day. This calculator can also provide some simple guidelines for gaining or losing weight.</p>
         <div className="result">Result :- {calorieValue(weight, age, height, gender, activity)} calories/day to maintain weight </div>

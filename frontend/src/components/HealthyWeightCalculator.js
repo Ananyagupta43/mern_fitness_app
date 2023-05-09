@@ -1,8 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./bmi_calculator/BMI.css";
+import { useNavigate } from "react-router-dom";
+
 
 const HealthyWeightCalculator = ({ person }) => {
+    const navigate = useNavigate()
     const { height } = person;
+
+    useEffect(() => {
+        callGetStartedHealthyWeight();
+    }, [])
+
+    const callGetStartedHealthyWeight = async () => {
+
+        const healthyWeight = healthyWeightValue(height);
+        const email = JSON.parse(localStorage.getItem("email"));
+
+        if (!email) {
+            email = "abc@gmail.com"
+        }
+        const res = await fetch("/calculatingHealthyWeight", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+
+            },
+            body: JSON.stringify({
+                height, healthyWeight, email
+            })
+
+        })
+
+        if (res.status === 200) {
+            window.alert("Your results has been forwarded to your email ID");
+        } else {
+            const err = new Error(res.error);
+            throw err;
+        }
+
+    }
+
+
+
+
     const healthyWeightValue = (height) => {
         height = height / 100;
         const lowerLimit = 18.5 * (height * height);
@@ -11,7 +51,12 @@ const HealthyWeightCalculator = ({ person }) => {
         return result;
     }
 
+    const goOnCalculator = () => {
+        navigate("/form")
+    }
+
     return <div style={{ padding: " 30px 50px" }}>
+        <div style={{ width: "225px" }}><button className="button go-back" style={{ marginBottom: "30px" }} onClick={(goOnCalculator)}>Go Back</button></div>
         <h1 className="main-heading" >Healthy Weight Calculator</h1>
         <p>This calculator computes a healthy body weight range based on a person's height and is most accurate for adults aged 18 or older.</p>
         <div className="result">Result :- {healthyWeightValue(height)} </div>

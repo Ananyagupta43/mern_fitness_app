@@ -7,6 +7,7 @@ const ExerciseCard = ({ exercise }) => {
     const navigate = useNavigate();
     const goToDetailPage = () => {
         navigate(`/exercisedetails/${exercise.id}`)
+        window.scrollTo({top: 0, left: 0, behaviour: "smooth"});
     }
 
     return <div onClick={goToDetailPage} style={{ paddingTop: "10px", display: "flex", flexDirection: "column", alignItems: "center" }}>

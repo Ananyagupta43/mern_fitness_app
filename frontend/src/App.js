@@ -14,6 +14,7 @@ import Signout from './pages/Signout';
 import SingleExercise from "./pages/single_exercise/SingleExercise";
 import Form from "./pages/form/Form";
 import Calculator from './pages/Calculator';
+import ExerciseDetails from "./pages/exercise_details/ExerciseDetails";
 
 import UserProfile from './pages/UserProfile/UserProfile';
 
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/form" element={<Form /> } />
         <Route path="/calculator/:name" element={<Calculator /> } />
         <Route path="/userProfile" element={<UserProfile />} />
+        <Route path="/exercisedetails/:id" element={<ExerciseDetails />} />
       </Routes>
       <Footer />
     </Box>
